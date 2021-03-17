@@ -1,10 +1,21 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AccountModule } from './account/account.module';
+
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [AccountModule, ConfigModule.forRoot(), TypeOrmModule.forRootAsync({
+    imports: [ConfigModule],
+    inject: [ConfigService],
+    useFactory: (config: ConfigService) => ({
+      url: config.get('DATABASE_URL'),
+      type: 'postgres',
+      autoLoadEntities: true,
+      synchronize: config.get('NODE_ENV') !== 'production',
+    }),
+  })],
+  controllers: [],
+  providers: [],
 })
-export class AppModule {}
+export class AppModule { }
