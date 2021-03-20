@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountModule } from './account/account.module';
 import { GameModule } from './game/game.module';
 import { CompanyModule } from './company/company.module';
+import { ContactModule } from './contact/contact.module';
 
 
 @Module({
@@ -22,6 +23,7 @@ import { CompanyModule } from './company/company.module';
     AccountModule,
     GameModule,
     CompanyModule,
+    ContactModule,
   ],
   controllers: [],
   providers: [],
