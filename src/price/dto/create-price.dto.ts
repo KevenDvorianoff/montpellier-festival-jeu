@@ -1,0 +1,21 @@
+import { IsBoolean, IsInt, IsNotEmpty, IsString, isNotEmpty, IsNumber } from "class-validator";
+
+export class CreatePriceDto { 
+
+
+    @IsString()
+    @IsNotEmpty()
+    label: string;
+
+    @IsInt()
+    tableCount: number;
+
+    @IsInt()
+    m2Count: number;
+
+    @IsNumber()
+    m2Price: number;
+
+    @IsNumber()
+    tablePrice: number;
+}
