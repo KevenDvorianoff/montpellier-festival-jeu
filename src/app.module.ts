@@ -5,6 +5,7 @@ import { AccountModule } from './account/account.module';
 import { GameModule } from './game/game.module';
 import { CompanyModule } from './company/company.module';
 import { ContactModule } from './contact/contact.module';
+import { GameTypeModule } from './game-type/game-type.module';
 
 
 @Module({
@@ -24,6 +25,7 @@ import { ContactModule } from './contact/contact.module';
     GameModule,
     CompanyModule,
     ContactModule,
+    GameTypeModule,
   ],
   controllers: [],
   providers: [],
