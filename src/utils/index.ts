@@ -8,6 +8,6 @@ export const allEntities = [
     Game
 ];
 
-export function databaseAccesModule() {
+export function databaseAccessModule() {
     return TypeOrmModule.forFeature(allEntities);
 }

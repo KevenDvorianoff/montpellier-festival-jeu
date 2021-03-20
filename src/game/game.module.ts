@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { GameService } from './game.service';
 import { GameController } from './game.controller';
-import { databaseAccesModule } from 'src/utils';
+import { databaseAccessModule } from 'src/utils';
 
 @Module({
-  imports: [databaseAccesModule()],
+  imports: [databaseAccessModule()],
   controllers: [GameController],
   providers: [GameService]
 })
