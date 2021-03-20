@@ -3,6 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountModule } from './account/account.module';
 import { GameModule } from './game/game.module';
+import { FestivalModule } from './festival/festival.module';
+import { PriceModule } from './price/price.module';
+import { AreaModule } from './area/area.module';
+import { ReservedTableModule } from './reserved-table/reserved-table.module';
 
 
 @Module({
@@ -20,6 +24,10 @@ import { GameModule } from './game/game.module';
     }),
     AccountModule,
     GameModule,
+    FestivalModule,
+    PriceModule,
+    AreaModule,
+    ReservedTableModule,
   ],
   controllers: [],
   providers: [],
