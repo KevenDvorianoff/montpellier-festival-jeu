@@ -3,6 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountModule } from './account/account.module';
 import { GameModule } from './game/game.module';
+import { ReservationModule } from './reservation/reservation.module';
+import { InvoiceModule } from './invoice/invoice.module';
+import { ReservedGameModule } from './reserved-game/reserved-game.module';
 
 
 @Module({
@@ -20,6 +23,9 @@ import { GameModule } from './game/game.module';
     }),
     AccountModule,
     GameModule,
+    ReservationModule,
+    InvoiceModule,
+    ReservedGameModule,
   ],
   controllers: [],
   providers: [],
