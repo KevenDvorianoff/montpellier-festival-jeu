@@ -14,6 +14,6 @@ export const allEntities = [
     ReservedGame
 ];
 
-export function databaseAccesModule() {
+export function databaseAccessModule() {
     return TypeOrmModule.forFeature(allEntities);
 }
