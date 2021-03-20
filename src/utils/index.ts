@@ -1,5 +1,8 @@
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Account } from "src/account/entities/account.entity";
+import { Company } from "src/company/entities/company.entity";
+import { Contact } from "src/contact/entities/contact.entity";
+import { GameType } from "src/game-type/entities/game-type.entity";
 import { Game } from "src/game/entities/game.entity";
 import { Festival } from "src/festival/entities/festival.entity";
 import { Price } from "src/price/entities/price.entity";
@@ -13,9 +16,13 @@ export const allEntities = [
     Festival,
     Price,
     Area,
-    ReservedTable
+    ReservedTable,
+    Company,
+    Contact,
+    GameType
+
 ];
 
-export function databaseAccesModule() {
+export function databaseAccessModule() {
     return TypeOrmModule.forFeature(allEntities);
 }

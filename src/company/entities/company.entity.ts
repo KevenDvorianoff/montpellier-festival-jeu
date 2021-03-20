@@ -1,0 +1,22 @@
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+
+@Entity()
+export class Company {
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column()
+    name: string;
+
+    @Column()
+    address: string;
+
+    @Column()
+    isPublicher: boolean;
+
+    @Column()
+    isExhibitor: boolean;
+
+    @Column({ default: true })
+    isActive: boolean;
+}

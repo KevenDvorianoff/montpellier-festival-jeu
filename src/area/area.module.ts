@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AreaService } from './area.service';
 import { AreaController } from './area.controller';
-import { databaseAccesModule } from 'src/utils';
+import { databaseAccessModule } from 'src/utils';
 
 @Module({
-  imports: [databaseAccesModule()],
+  imports: [databaseAccessModule()],
   controllers: [AreaController],
   providers: [AreaService]
 })

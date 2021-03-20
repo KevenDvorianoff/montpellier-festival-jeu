@@ -7,7 +7,9 @@ import { FestivalModule } from './festival/festival.module';
 import { PriceModule } from './price/price.module';
 import { AreaModule } from './area/area.module';
 import { ReservedTableModule } from './reserved-table/reserved-table.module';
-
+import { CompanyModule } from './company/company.module';
+import { ContactModule } from './contact/contact.module';
+import { GameTypeModule } from './game-type/game-type.module';
 
 @Module({
   imports: [
@@ -28,6 +30,10 @@ import { ReservedTableModule } from './reserved-table/reserved-table.module';
     PriceModule,
     AreaModule,
     ReservedTableModule,
+    CompanyModule,
+    ContactModule,
+    GameTypeModule,
+
   ],
   controllers: [],
   providers: [],

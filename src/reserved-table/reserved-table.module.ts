@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ReservedTableService } from './reserved-table.service';
 import { ReservedTableController } from './reserved-table.controller';
-import { databaseAccesModule } from 'src/utils';
+import { databaseAccessModule } from 'src/utils';
 
 @Module({
-  imports: [databaseAccesModule()],
+  imports: [databaseAccessModule()],
   controllers: [ReservedTableController],
   providers: [ReservedTableService]
 })

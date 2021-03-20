@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { PriceService } from './price.service';
 import { PriceController } from './price.controller';
-import { databaseAccesModule } from 'src/utils';
+import { databaseAccessModule } from 'src/utils';
 
 @Module({
-  imports: [databaseAccesModule()],
+  imports: [databaseAccessModule()],
   controllers: [PriceController],
   providers: [PriceService]
 })
