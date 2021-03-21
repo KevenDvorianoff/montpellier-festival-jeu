@@ -31,13 +31,6 @@ export class Game {
     @Column({ default: false })
     isPrototype: boolean;
 
-    // Foreing key
-    @Column()
-    publisherId: number;
-
-    @Column()
-    gameTypeId: number;
-
     // Relation
     @ManyToOne(() => Company, (publisher) => publisher.games)
     publisher: Company;

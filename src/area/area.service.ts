@@ -35,7 +35,7 @@ export class AreaService {
       return area;
     }
     else {
-      throw new NotFoundException(`No account found with id ${id}`);
+      throw new NotFoundException(`No area found with id ${id}`);
     }
   }
 

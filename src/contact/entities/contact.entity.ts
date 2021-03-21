@@ -36,10 +36,6 @@ export class Contact {
     @Column()
     function: string;
 
-    // Foreign key
-    @Column()
-    companyId: number;
-
     // Relation
     @ManyToOne(() => Company, (company) => company.contacts)
     company: Company;
