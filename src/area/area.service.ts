@@ -1,26 +1,36 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAreaDto } from './dto/create-area.dto';
 import { UpdateAreaDto } from './dto/update-area.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Area } from './entities/area.entity';
 
 @Injectable()
 export class AreaService {
+  constructor(@InjectRepository(Area) private areaRepository: Repository<Area>) {}
   create(createAreaDto: CreateAreaDto) {
-    return 'This action adds a new area';
+    return this.areaRepository.save(createAreaDto);
   }
 
   findAll() {
-    return `This action returns all area`;
+    return this.areaRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} area`;
+  async findOne(id: number) {
+    const area = await this.areaRepository.findOne(id);
+    if (area) {
+      return area;
+    }
+    else {
+      throw new NotFoundException(`No account found with id ${id}`);
+    }
   }
 
   update(id: number, updateAreaDto: UpdateAreaDto) {
-    return `This action updates a #${id} area`;
+    return this.areaRepository.update(id, updateAreaDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} area`;
+    return this.areaRepository.delete(id);
   }
 }
