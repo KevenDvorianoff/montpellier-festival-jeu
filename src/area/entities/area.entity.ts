@@ -10,10 +10,6 @@ export class Area {
     @Column()
     label: string;
 
-    // Foreign key
-    @Column()
-    festivalId: number;
-
     // Relation
     @ManyToOne(() => Festival, (festival) => festival.areas)
     festival: Festival;
