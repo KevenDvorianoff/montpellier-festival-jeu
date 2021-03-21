@@ -16,4 +16,7 @@ export class CreatePriceDto {
 
     @IsNumber()
     tablePrice: number;
+
+    @IsNumber()
+    festivalId: number;
 }

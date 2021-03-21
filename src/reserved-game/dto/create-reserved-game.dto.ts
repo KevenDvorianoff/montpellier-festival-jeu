@@ -26,4 +26,14 @@ export class CreateReservedGameDto {
 
     @IsNumber()
     tableCount: number;
+
+    @IsNumber()
+    reservationId: number;
+
+    @IsNumber()
+    gameId: number;
+
+    @IsNumber()
+    @IsOptional()
+    areaId?: number;
 }

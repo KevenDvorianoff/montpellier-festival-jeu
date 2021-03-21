@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Company } from "src/company/entities/company.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Contact {
@@ -34,4 +35,12 @@ export class Contact {
 
     @Column()
     function: string;
+
+    // Foreign key
+    @Column()
+    companyId: number;
+
+    // Relation
+    @ManyToOne(() => Company, (company) => company.contacts)
+    company: Company;
 }

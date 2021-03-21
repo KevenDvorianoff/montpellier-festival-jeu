@@ -6,4 +6,10 @@ export class CreateReservedTableDto {
 
     @IsNumber()
     m2Count: number;
+
+    @IsNumber()
+    priceId: number;
+
+    @IsNumber()
+    reservationId: number;
 }

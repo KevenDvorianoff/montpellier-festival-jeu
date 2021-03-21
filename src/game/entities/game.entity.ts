@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Company } from "src/company/entities/company.entity";
+import { GameType } from "src/game-type/entities/game-type.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Game {
@@ -28,4 +30,18 @@ export class Game {
 
     @Column({ default: false })
     isPrototype: boolean;
+
+    // Foreing key
+    @Column()
+    publisherId: number;
+
+    @Column()
+    gameTypeId: number;
+
+    // Relation
+    @ManyToOne(() => Company, (publisher) => publisher.games)
+    publisher: Company;
+
+    @ManyToOne(() => GameType, (gameType) => gameType.games)
+    gameType: GameType;
 }

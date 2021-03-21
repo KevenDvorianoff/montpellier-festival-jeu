@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Festival } from "src/festival/entities/festival.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Price {
@@ -19,4 +20,12 @@ export class Price {
 
     @Column('float')
     tablePrice: number;
+
+    // Foreign key
+    @Column()
+    festivalId: number;
+
+    // Relation
+    @ManyToOne(() => Festival, (festival) => festival.prices)
+    festival: Festival;
 }

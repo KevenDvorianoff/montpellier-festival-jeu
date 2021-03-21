@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Festival } from "src/festival/entities/festival.entity";
+import { ReservedGame } from "src/reserved-game/entities/reserved-game.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Area {
@@ -7,4 +9,12 @@ export class Area {
 
     @Column()
     label: string;
+
+    // Foreign key
+    @Column()
+    festivalId: number;
+
+    // Relation
+    @ManyToOne(() => Festival, (festival) => festival.areas)
+    festival: Festival;
 }

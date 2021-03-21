@@ -1,4 +1,7 @@
-import { Column, Entity } from "typeorm";
+import { Area } from "src/area/entities/area.entity";
+import { Game } from "src/game/entities/game.entity";
+import { Reservation } from "src/reservation/entities/reservation.entity";
+import { Column, Entity, ManyToOne } from "typeorm";
 
 @Entity()
 export class ReservedGame {
@@ -22,4 +25,24 @@ export class ReservedGame {
 
     @Column('float')
     tableCount: number;
+
+    // Foreign key
+    @Column({ primary: true })
+    reservationId: number;
+
+    @Column({ primary: true })
+    gameId: number;
+
+    @Column({ nullable: true })
+    areaId: number;
+
+    // Relation
+    @ManyToOne(() => Reservation, (reservation) => reservation.reservedGames, { primary: true })
+    reservation: Reservation;
+
+    @ManyToOne(() => Game, { primary: true })
+    game: Game;
+
+    @ManyToOne(() => Area, { nullable: true })
+    area: Area;
 }

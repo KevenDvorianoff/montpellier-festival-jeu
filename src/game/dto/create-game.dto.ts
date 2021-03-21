@@ -1,4 +1,4 @@
-import { IsBoolean, IsInt, IsNotEmpty, IsString } from "class-validator";
+import { IsBoolean, IsInt, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateGameDto {
     @IsString()
@@ -27,4 +27,10 @@ export class CreateGameDto {
 
     @IsBoolean()
     isPrototype: boolean;
+
+    @IsNumber()
+    publisherId: number;
+
+    @IsNumber()
+    gameTypeId: number;
 }

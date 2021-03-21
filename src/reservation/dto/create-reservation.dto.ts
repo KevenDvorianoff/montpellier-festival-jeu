@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsBoolean, IsString, IsDate, IsNotEmpty } from "class-validator";
+import { IsBoolean, IsString, IsDate, IsNumber, IsOptional } from "class-validator";
 
 export class CreateReservationDto {
     @IsString()
@@ -17,4 +17,14 @@ export class CreateReservationDto {
     @IsDate()
     @Type(() => Date)
     reservationDate: Date;
+
+    @IsNumber()
+    festivalId: number;
+
+    @IsNumber()
+    companyId: number;
+
+    @IsNumber()
+    @IsOptional()
+    invoiceId?: number;
 }
