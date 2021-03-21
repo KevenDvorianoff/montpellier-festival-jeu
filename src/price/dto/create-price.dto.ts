@@ -1,8 +1,6 @@
-import { IsBoolean, IsInt, IsNotEmpty, IsString, isNotEmpty, IsNumber } from "class-validator";
+import { IsInt, IsNotEmpty, IsString, IsNumber } from "class-validator";
 
 export class CreatePriceDto { 
-
-
     @IsString()
     @IsNotEmpty()
     label: string;

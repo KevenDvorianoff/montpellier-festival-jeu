@@ -1,19 +1,19 @@
-import { PrimaryColumn, Column } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity()
 export class Invoice {
-
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column('float')
     price: number;
 
-    @Column()
+    @Column('float')
     discount: number;
 
-    @Column()
+    @Column({ nullable: true })
     sentDate: Date;
 
-    @Column({ default: null})
+    @Column({ nullable: true })
     paymentDate: Date;
 }

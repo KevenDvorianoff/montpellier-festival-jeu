@@ -14,16 +14,16 @@ export class Game {
     @Column()
     duration: string;
 
-    @Column()
+    @Column('int')
     minPlayers: number;
 
-    @Column()
+    @Column('int')
     maxPlayers: number;
 
-    @Column()
+    @Column('int')
     minAge: number;
 
-    @Column()
+    @Column('int')
     maxAge: number;
 
     @Column({ default: false })

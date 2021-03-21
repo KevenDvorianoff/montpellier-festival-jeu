@@ -3,14 +3,14 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Festival {
     @PrimaryGeneratedColumn()
-    id_festival: number;
+    id: number;
 
     @Column({ unique: true })
     name: string;
 
-    @Column({ type: 'date' })
-    date: string;
+    @Column()
+    date: Date;
 
-    @Column({default: false})
+    @Column({ default: false })
     isActive: boolean;
 }

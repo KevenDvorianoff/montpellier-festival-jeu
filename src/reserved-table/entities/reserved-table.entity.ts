@@ -2,9 +2,9 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class ReservedTable {
-    @Column()
+    @Column('float')
     tableCount: number;
 
-    @Column()
+    @Column('float')
     m2Count: number;
 }

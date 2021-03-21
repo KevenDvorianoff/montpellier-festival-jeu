@@ -3,22 +3,20 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Price {
     @PrimaryGeneratedColumn()
-    id_price: number;
+    id: number;
 
     @Column()
     label: string;
 
-    @Column()
+    @Column('int')
     tableCount: number;
 
-    @Column()
+    @Column('int')
     m2Count: number;
 
-    @Column()
+    @Column('float')
     m2Price: number;
 
-    @Column()
+    @Column('float')
     tablePrice: number;
-
-
 }

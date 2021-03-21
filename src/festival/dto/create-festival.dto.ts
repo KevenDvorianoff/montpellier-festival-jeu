@@ -1,3 +1,4 @@
+import { Type } from "class-transformer";
 import { IsBoolean, IsNotEmpty, IsString, IsDate } from "class-validator";
 
 export class CreateFestivalDto {
@@ -6,7 +7,8 @@ export class CreateFestivalDto {
     name: string;
 
     @IsDate()
-    date: string;
+    @Type(() => Date)
+    date: Date;
 
     @IsBoolean()
     isActive: boolean;

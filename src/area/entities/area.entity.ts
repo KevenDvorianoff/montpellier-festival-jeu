@@ -3,8 +3,8 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Area {
     @PrimaryGeneratedColumn()
-    id_area: number;
+    id: number;
 
     @Column()
-    label_area: string;
+    label: string;
 }

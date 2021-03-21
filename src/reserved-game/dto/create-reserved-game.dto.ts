@@ -1,7 +1,7 @@
-import { IsNumber, IsInt, IsDate, IsBoolean } from "class-validator";
+import { Type } from "class-transformer";
+import { IsNumber, IsInt, IsDate, IsBoolean, IsOptional } from "class-validator";
 
 export class CreateReservedGameDto {
-
     @IsInt()
     exposed: number;
 
@@ -12,10 +12,17 @@ export class CreateReservedGameDto {
     tombola: number;
 
     @IsDate()
-    receiveDate: Date;
+    @Type(() => Date)
+    @IsOptional()
+    receiveDate?: Date;
 
     @IsBoolean()
     needReturn: boolean;
+
+    @IsDate()
+    @Type(() => Date)
+    @IsOptional()
+    returnDate?: Date;
 
     @IsNumber()
     tableCount: number;

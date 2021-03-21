@@ -1,7 +1,7 @@
-import { IsNumber, IsDate } from "class-validator";
+import { Type } from "class-transformer";
+import { IsNumber, IsDate, IsOptional } from "class-validator";
 
 export class CreateInvoiceDto {
-
     @IsNumber()
     price: number;
 
@@ -9,6 +9,12 @@ export class CreateInvoiceDto {
     discount: number;
 
     @IsDate()
-    sentDate: Date;
+    @Type(() => Date)
+    @IsOptional()
+    sentDate?: Date;
 
+    @IsDate()
+    @Type(() => Date)
+    @IsOptional()
+    paymentDate?: Date;
 }

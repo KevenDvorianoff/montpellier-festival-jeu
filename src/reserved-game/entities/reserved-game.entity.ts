@@ -1,26 +1,25 @@
-import { Column } from "typeorm";
+import { Column, Entity } from "typeorm";
 
+@Entity()
 export class ReservedGame {
-
-    @Column()
+    @Column('int')
     exposed: number;
 
-    @Column()
+    @Column('int')
     donation: number;
 
-    @Column()
+    @Column('int')
     tombola: number;
 
-    @Column()
+    @Column({ nullable: true })
     receiveDate: Date;
 
     @Column()
     needReturn: boolean;
 
-    @Column({ default: null})
+    @Column({ nullable: true })
     returnDate: Date;
 
-    @Column()
+    @Column('float')
     tableCount: number;
-
 }

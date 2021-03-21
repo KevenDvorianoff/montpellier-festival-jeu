@@ -1,23 +1,22 @@
-import { Entity, PrimaryColumn, Column } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Reservation {
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column('text')
     comment: string;
 
     @Column()
     needVolonteers: boolean;
 
-    @Column({ default: false})
+    @Column()
     isPresent: boolean;
 
-    @Column({ default: false})
+    @Column()
     isPlaced: boolean;
 
     @Column()
     reservationDate: Date;
-
 }

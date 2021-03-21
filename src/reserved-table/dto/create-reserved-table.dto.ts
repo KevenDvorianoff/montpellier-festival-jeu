@@ -1,9 +1,9 @@
 import { IsBoolean, IsInt, IsNotEmpty, IsString, isNotEmpty, IsNumber } from "class-validator";
 
 export class CreateReservedTableDto {
-    @IsInt()
+    @IsNumber()
     tableCount: number;
 
-    @IsInt()
+    @IsNumber()
     m2Count: number;
 }
