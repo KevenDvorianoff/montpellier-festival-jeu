@@ -21,10 +21,6 @@ export class Price {
     @Column('float')
     tablePrice: number;
 
-    // Foreign key
-    @Column()
-    festivalId: number;
-
     // Relation
     @ManyToOne(() => Festival, (festival) => festival.prices)
     festival: Festival;

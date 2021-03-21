@@ -25,16 +25,6 @@ export class Reservation {
     @Column()
     reservationDate: Date;
 
-    // Foreign key
-    @Column()
-    festivalId: number;
-
-    @Column()
-    companyId: number;
-
-    @Column({ nullable: true })
-    invoiceId: number;
-
     // Relation
     @ManyToOne(() => Festival, (festival) => festival.reservations)
     festival: Festival;

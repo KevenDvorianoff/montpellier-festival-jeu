@@ -10,13 +10,6 @@ export class ReservedTable {
     @Column('float')
     m2Count: number;
 
-    // Foreign key
-    @Column({ primary: true })
-    priceId: number;
-
-    @Column({ primary: true })
-    reservationId: number;
-
     // Relation
     @ManyToOne(() => Price, { primary: true })
     price: Price;

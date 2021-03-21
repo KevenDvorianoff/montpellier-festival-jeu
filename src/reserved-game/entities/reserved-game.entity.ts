@@ -26,16 +26,6 @@ export class ReservedGame {
     @Column('float')
     tableCount: number;
 
-    // Foreign key
-    @Column({ primary: true })
-    reservationId: number;
-
-    @Column({ primary: true })
-    gameId: number;
-
-    @Column({ nullable: true })
-    areaId: number;
-
     // Relation
     @ManyToOne(() => Reservation, (reservation) => reservation.reservedGames, { primary: true })
     reservation: Reservation;
