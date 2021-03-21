@@ -7,6 +7,13 @@ import { ReservationModule } from './reservation/reservation.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { ReservedGameModule } from './reserved-game/reserved-game.module';
 
+import { FestivalModule } from './festival/festival.module';
+import { PriceModule } from './price/price.module';
+import { AreaModule } from './area/area.module';
+import { ReservedTableModule } from './reserved-table/reserved-table.module';
+import { CompanyModule } from './company/company.module';
+import { ContactModule } from './contact/contact.module';
+import { GameTypeModule } from './game-type/game-type.module';
 
 @Module({
   imports: [
@@ -26,6 +33,14 @@ import { ReservedGameModule } from './reserved-game/reserved-game.module';
     ReservationModule,
     InvoiceModule,
     ReservedGameModule,
+    FestivalModule,
+    PriceModule,
+    AreaModule,
+    ReservedTableModule,
+    CompanyModule,
+    ContactModule,
+    GameTypeModule,
+
   ],
   controllers: [],
   providers: [],
