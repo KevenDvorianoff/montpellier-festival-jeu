@@ -1,26 +1,39 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateGameTypeDto } from './dto/create-game-type.dto';
 import { UpdateGameTypeDto } from './dto/update-game-type.dto';
+import { GameType} from './entities/game-type.entity'
 
 @Injectable()
 export class GameTypeService {
+
+  constructor(@InjectRepository(GameType) private gameTypeRepository: Repository<GameType>) {}
+
   create(createGameTypeDto: CreateGameTypeDto) {
-    return 'This action adds a new gameType';
+    return this.gameTypeRepository.save(createGameTypeDto);
   }
 
   findAll() {
-    return `This action returns all gameType`;
+    return this.gameTypeRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} gameType`;
+  async findOne(id: number) {
+    const gameType = await this.gameTypeRepository.findOne(id);
+
+    if(gameType){
+      return gameType;
+    }
+    else {
+      throw new NotFoundException(`No game type found with this id ${id}`)
+    }
   }
 
   update(id: number, updateGameTypeDto: UpdateGameTypeDto) {
-    return `This action updates a #${id} gameType`;
+    return this.gameTypeRepository.update(id, updateGameTypeDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} gameType`;
-  }
+    return this.gameTypeRepository.delete(id);
+  } 
 }
