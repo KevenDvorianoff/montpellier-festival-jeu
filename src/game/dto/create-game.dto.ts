@@ -3,15 +3,15 @@ import { IsBoolean, IsInt, IsNotEmpty, IsNumber, IsString } from "class-validato
 export class CreateGameDto {
     @IsString()
     @IsNotEmpty()
-    name: String;
+    name: string;
 
     @IsString()
     @IsNotEmpty()
-    notice: String;
+    notice: string;
 
     @IsString()
     @IsNotEmpty()
-    duration: String;
+    duration: string;
 
     @IsInt()
     minPlayers: number;
