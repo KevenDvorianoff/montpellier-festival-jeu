@@ -1,26 +1,38 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateFestivalDto } from './dto/create-festival.dto';
 import { UpdateFestivalDto } from './dto/update-festival.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Festival } from './entities/festival.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class FestivalService {
+
+  constructor(@InjectRepository(Festival) private festivalRepository: Repository<Festival>) {}
+  
   create(createFestivalDto: CreateFestivalDto) {
-    return 'This action adds a new festival';
+    return this.festivalRepository.save(createFestivalDto);
   }
 
   findAll() {
-    return `This action returns all festival`;
+    return this.festivalRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} festival`;
+  async findOne(id: number) {
+    const festival = await this.festivalRepository.findOne(id);
+    if (festival) {
+      return festival;
+    }
+    else {
+      throw new NotFoundException(`No festival found with id ${id}`);
+    }
   }
 
   update(id: number, updateFestivalDto: UpdateFestivalDto) {
-    return `This action updates a #${id} festival`;
+    return this.festivalRepository.update(id,updateFestivalDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} festival`;
+    return this.festivalRepository.delete(id);
   }
 }
