@@ -2,12 +2,13 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { CreateAreaDto } from './dto/create-area.dto';
 import { UpdateAreaDto } from './dto/update-area.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, In } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Area } from './entities/area.entity';
 import { Festival } from 'src/festival/entities/festival.entity';
 
 @Injectable()
 export class AreaService {
+
   constructor(
     @InjectRepository(Area) private areaRepository: Repository<Area>,
     @InjectRepository(Festival) private festivalRepository: Repository<Festival>
