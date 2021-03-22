@@ -35,7 +35,7 @@ export class ContactService {
       return contact;
     }
     else {
-      throw new NotFoundException(`No contact found with id ${id}`)
+      throw new NotFoundException(`No contact found with id ${id}`);
     }
   }
 

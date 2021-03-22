@@ -1,26 +1,81 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Company } from 'src/company/entities/company.entity';
+import { Festival } from 'src/festival/entities/festival.entity';
+import { Invoice } from 'src/invoice/entities/invoice.entity';
+import { Repository } from 'typeorm';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
+import { Reservation } from './entities/reservation.entity';
 
 @Injectable()
 export class ReservationService {
-  create(createReservationDto: CreateReservationDto) {
-    return 'This action adds a new reservation';
+
+  constructor(
+    @InjectRepository(Reservation) private reservationRepository: Repository<Reservation>,
+    @InjectRepository(Festival) private festivalRepository: Repository<Festival>,
+    @InjectRepository(Company) private companyRepository: Repository<Company>,
+    @InjectRepository(Invoice) private invoiceRepository: Repository<Invoice>
+  ) {}
+
+  async create(createReservationDto: CreateReservationDto) {
+    const { festivalId, companyId, invoiceId, ...dto } = createReservationDto;
+    const festival = await this.festivalRepository.findOne(festivalId);
+    const company = await this.companyRepository.findOne(companyId);
+
+    if (invoiceId) {
+      const invoice = await this.invoiceRepository.findOne(invoiceId);
+
+      if (festival && company && invoice) {
+        return this.reservationRepository.save({ festival, company, invoice, ...dto });
+      }
+      else {
+        throw new BadRequestException();
+      }
+    }
+    else {
+      if (festival && company) {
+        return this.reservationRepository.save({ festival, company, ...dto });
+      }
+      else {
+        throw new BadRequestException();
+      }
+    }
   }
 
   findAll() {
-    return `This action returns all reservation`;
+    return this.reservationRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} reservation`;
+  async findOne(id: number) {
+    const reservation = await this.reservationRepository.findOne(id);
+    if (reservation) {
+      return reservation;
+    }
+    else {
+      throw new NotFoundException(`No reservation found with id ${id}`)
+    }
   }
 
-  update(id: number, updateReservationDto: UpdateReservationDto) {
-    return `This action updates a #${id} reservation`;
+  async update(id: number, updateReservationDto: UpdateReservationDto) {
+    const { invoiceId, ...dto } = updateReservationDto;
+    
+    if (invoiceId) {
+      const invoice = await this.invoiceRepository.findOne(invoiceId);
+
+      if (invoice) {
+        return this.reservationRepository.update(id, { invoice, ...dto });
+      }
+      else {
+        throw new BadRequestException();
+      }
+    }
+    else {
+        return this.reservationRepository.update(id, updateReservationDto);
+    }
   }
 
   remove(id: number) {
-    return `This action removes a #${id} reservation`;
+    return this.reservationRepository.delete(id);
   }
 }
