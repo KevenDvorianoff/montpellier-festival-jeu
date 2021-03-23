@@ -14,7 +14,7 @@ export class Reservation {
     comment: string;
 
     @Column()
-    needVolonteers: boolean;
+    needVolunteers: boolean;
 
     @Column()
     isPresent: boolean;
