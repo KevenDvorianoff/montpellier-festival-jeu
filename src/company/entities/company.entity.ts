@@ -14,7 +14,7 @@ export class Company {
     address: string;
 
     @Column()
-    isPublicher: boolean;
+    isPublisher: boolean;
 
     @Column()
     isExhibitor: boolean;
