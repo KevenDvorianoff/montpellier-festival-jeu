@@ -31,6 +31,9 @@ export class Game {
     @Column({ default: false })
     isPrototype: boolean;
 
+    @Column()
+    lastModification: Date;
+
     // Relation
     @ManyToOne(() => Company, (publisher) => publisher.games)
     publisher: Company;

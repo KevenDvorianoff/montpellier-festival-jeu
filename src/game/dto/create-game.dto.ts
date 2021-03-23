@@ -1,4 +1,5 @@
-import { IsBoolean, IsInt, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsBoolean, IsInt, IsNotEmpty, IsNumber, IsString, IsDate } from "class-validator";
+import { Type } from "class-transformer";
 
 export class CreateGameDto {
     @IsString()
@@ -28,9 +29,14 @@ export class CreateGameDto {
     @IsBoolean()
     isPrototype: boolean;
 
+    @IsDate()
+    @Type(() => Date)
+    lastModification: Date;
+
     @IsNumber()
     publisherId: number;
 
     @IsNumber()
     gameTypeId: number;
+
 }
