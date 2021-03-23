@@ -28,6 +28,19 @@ export class FestivalService {
     }
   }
 
+  findGamesForCurrentFestival() {
+    return this.festivalRepository.findOne({
+      where : {
+        isActive: true
+      },
+      relations : [
+        'reservations',
+        'reservations.reservedGames',
+        'reservations.reservedGames.game'
+      ]
+    })
+  }
+
   update(id: number, updateFestivalDto: UpdateFestivalDto) {
     return this.festivalRepository.update(id,updateFestivalDto);
   }

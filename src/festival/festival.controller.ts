@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { FestivalService } from './festival.service';
 import { CreateFestivalDto } from './dto/create-festival.dto';
 import { UpdateFestivalDto } from './dto/update-festival.dto';
@@ -16,7 +16,12 @@ export class FestivalController {
   findAll() {
     return this.festivalService.findAll();
   }
-
+  
+  @Get('current/reserved-games')
+  findGamesForCurrentFestival() {
+    return this.festivalService.findGamesForCurrentFestival();
+  }
+  
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.festivalService.findOne(+id);
