@@ -4,7 +4,6 @@ import { UpdateFestivalDto } from './dto/update-festival.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Festival } from './entities/festival.entity';
 import { Repository } from 'typeorm';
-import { PartialGame } from 'src/game/entities/partialGame.entity';
 
 
 @Injectable()
@@ -30,38 +29,25 @@ export class FestivalService {
     }
   }
 
-  async findGamesForCurrentFestival() {
-
-    const games = await this.festivalRepository.findOne({
-      where : {
-        isActive: true
-      },
-      relations : [
-        'reservations',
-        'reservations.reservedGames',
-        'reservations.reservedGames.area',
-        'reservations.reservedGames.game',
-        'reservations.reservedGames.game.publisher',
-        'reservations.reservedGames.game.gameType'
-      ]
-    })
-
-    let res: PartialGame[] = [];
-    games.reservations
-    .forEach(reservation => reservation.reservedGames
-      .forEach(reservedGame => {
-        if (reservedGame.area) {
-          const game = new PartialGame(reservedGame.game, reservedGame.area);
-          res.push(game)
-        }
-        else {
-          const game = new PartialGame(reservedGame.game);
-          res.push(game)
-        }
-      })
-    );
-
-    return res;
+  findGamesForCurrentFestival() {
+    return this.festivalRepository.createQueryBuilder('festival')
+    .leftJoin('festival.reservations', 'reservations')
+    .leftJoin('reservations.reservedGames', 'reservedGames')
+    .leftJoin('reservedGames.game', 'game')
+    .leftJoin('game.gameType', 'gameType')
+    .select('game.id', 'id')
+    .addSelect('game.name', 'name')
+    .addSelect('game.notice', 'notice')
+    .addSelect('game.duration', 'duration')
+    .addSelect('game.minPlayers', 'minPlayers')
+    .addSelect('game.maxPlayers', 'maxPlayers')
+    .addSelect('game.minAge', 'minAge')
+    .addSelect('game.maxAge', 'maxage')
+    .addSelect('game.isPrototype', 'isPrototype')
+    .addSelect('game.publisherId', 'publisherId')
+    .addSelect('reservedGames.areaId', 'areaId')
+    .addSelect('gameType.label', 'gameType')
+    .getRawMany();
   }
 
   update(id: number, updateFestivalDto: UpdateFestivalDto) {
