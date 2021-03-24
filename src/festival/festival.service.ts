@@ -4,6 +4,8 @@ import { UpdateFestivalDto } from './dto/update-festival.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Festival } from './entities/festival.entity';
 import { Repository } from 'typeorm';
+import { PartialGame } from 'src/game/entities/partialGame.entity';
+
 
 @Injectable()
 export class FestivalService {
@@ -28,17 +30,38 @@ export class FestivalService {
     }
   }
 
-  findGamesForCurrentFestival() {
-    return this.festivalRepository.findOne({
+  async findGamesForCurrentFestival() {
+
+    const games = await this.festivalRepository.findOne({
       where : {
         isActive: true
       },
       relations : [
         'reservations',
         'reservations.reservedGames',
-        'reservations.reservedGames.game'
+        'reservations.reservedGames.area',
+        'reservations.reservedGames.game',
+        'reservations.reservedGames.game.publisher',
+        'reservations.reservedGames.game.gameType'
       ]
     })
+
+    let res: PartialGame[] = [];
+    games.reservations
+    .forEach(reservation => reservation.reservedGames
+      .forEach(reservedGame => {
+        if (reservedGame.area) {
+          const game = new PartialGame(reservedGame.game, reservedGame.area);
+          res.push(game)
+        }
+        else {
+          const game = new PartialGame(reservedGame.game);
+          res.push(game)
+        }
+      })
+    );
+
+    return res;
   }
 
   update(id: number, updateFestivalDto: UpdateFestivalDto) {
