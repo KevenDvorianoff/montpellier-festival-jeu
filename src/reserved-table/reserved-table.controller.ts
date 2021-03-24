@@ -17,18 +17,18 @@ export class ReservedTableController {
     return this.reservedTableService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.reservedTableService.findOne(+id);
+  @Get(':idPrice/:idReservation')
+  findOne(@Param('idPrice') idPrice: string, @Param('idReservation') idReservation: string) {
+    return this.reservedTableService.findOne(+idPrice, +idReservation);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReservedTableDto: UpdateReservedTableDto) {
-    return this.reservedTableService.update(+id, updateReservedTableDto);
+  @Patch(':idPrice/:idReservation')
+  update(@Param('idPrice') idPrice: string, @Param('idReservation') idReservation: string, @Body() updateReservedTableDto: UpdateReservedTableDto) {
+    return this.reservedTableService.update(+idPrice, +idReservation, updateReservedTableDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.reservedTableService.remove(+id);
+  @Delete(':idPrice/:idReservation')
+  remove(@Param('idPrice') idPrice: string, @Param('idReservation') idReservation: string) {
+    return this.reservedTableService.remove(+idPrice, +idReservation);
   }
 }

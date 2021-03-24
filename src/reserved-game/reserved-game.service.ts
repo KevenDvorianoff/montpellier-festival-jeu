@@ -47,21 +47,26 @@ export class ReservedGameService {
   }
 
   findAll() {
-    return this.reservedGameRepository.find();
+    return this.reservedGameRepository.find({
+        relations: [ 'area' ]
+      }
+    );
   }
 
-  async findOne(id: number) {
-    const reservedGame = await this.reservedGameRepository.findOne(id);
+  async findOne(idReservation: number, idGame: number) {
+    const reservedGame = await this.reservedGameRepository.findOne({reservation: { id: idReservation }, game: { id: idGame }}, {
+      relations: [ 'area' ]
+    });
 
     if(reservedGame){
       return reservedGame;
     }
     else{
-      throw new NotFoundException(`No reserved game found with id ${id}`)
+      throw new NotFoundException(`No reserved game found with reservation id ${idReservation} and game id ${idGame}`)
     }
   }
 
-  async update(id: number, updateReservedGameDto: UpdateReservedGameDto) {
+  async update(idReservation: number, idGame: number, updateReservedGameDto: UpdateReservedGameDto) {
     
     const {areaId, ...dto} = updateReservedGameDto;
 
@@ -69,18 +74,18 @@ export class ReservedGameService {
       const area = await this.areaRepository.findOne(areaId);
 
       if(area){
-        return this.reservedGameRepository.update(id,{area, ...dto});
+        return this.reservedGameRepository.update({reservation: { id: idReservation }, game: { id: idGame }}, {area, ...dto});
       }
       else{
         throw new BadRequestException();
       }
     }
     else{
-      return this.reservedGameRepository.update(id, updateReservedGameDto);
+      return this.reservedGameRepository.update([idReservation, idGame], updateReservedGameDto);
     }
   }
 
-  remove(id: number) {
-    return this.reservedGameRepository.delete(id);
+  remove(idReservation: number, idGame: number) {
+    return this.reservedGameRepository.delete({reservation: { id: idReservation }, game: { id: idGame }});
   }
 } 

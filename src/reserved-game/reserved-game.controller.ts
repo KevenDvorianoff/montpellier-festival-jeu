@@ -17,18 +17,18 @@ export class ReservedGameController {
     return this.reservedGameService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.reservedGameService.findOne(+id);
+  @Get(':idReservation/:idGame')
+  findOne(@Param('idReservation') idReservation: string, @Param('idGame') idGame: string) {
+    return this.reservedGameService.findOne(+idReservation, +idGame);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReservedGameDto: UpdateReservedGameDto) {
-    return this.reservedGameService.update(+id, updateReservedGameDto);
+  @Patch(':idReservation/:idGame')
+  update(@Param('idReservation') idReservation: string, @Param('idGame') idGame: string, @Body() updateReservedGameDto: UpdateReservedGameDto) {
+    return this.reservedGameService.update(+idReservation, +idGame, updateReservedGameDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.reservedGameService.remove(+id);
+  @Delete(':idReservation/:idGame')
+  remove(@Param('idReservation') idReservation: string, @Param('idGame') idGame: string) {
+    return this.reservedGameService.remove(+idReservation, +idGame);
   }
 }

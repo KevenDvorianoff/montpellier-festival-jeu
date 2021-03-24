@@ -33,24 +33,28 @@ export class ReservedTableService {
   }
 
   findAll() {
-    return this.reservedtableRepository.find();
+    return this.reservedtableRepository.find({
+      relations : [ 'price', 'reservation']
+    });
   }
 
-  async findOne(id: number) {
-    const reservedTable = await this.reservedtableRepository.findOne(id);
+  async findOne(idPrice: number, idReservation: number) {
+    const reservedTable = await this.reservedtableRepository.findOne({price: { id: idPrice }, reservation: { id: idReservation }}, {
+      relations : [ 'price', 'reservation']
+    });
     if (reservedTable) {
       return reservedTable;
     }
     else {
-      throw new NotFoundException(`No reserved table found with id ${id}`);
+      throw new NotFoundException(`No reserved table found with price id ${idPrice} and reservation id ${idReservation}`);
     }
   }
 
-  update(id: number, updateReservedTableDto: UpdateReservedTableDto) {
-    return this.reservedtableRepository.update(id, updateReservedTableDto);
+  update(idPrice: number, idReservation: number, updateReservedTableDto: UpdateReservedTableDto) {
+    return this.reservedtableRepository.update({price: { id: idPrice }, reservation: { id: idReservation }}, updateReservedTableDto);
   }
 
-  remove(id: number) {
-    return this.reservedtableRepository.delete(id);
+  remove(idPrice: number, idReservation: number) {
+    return this.reservedtableRepository.delete({price: { id: idPrice }, reservation: { id: idReservation }});
   }
 }
