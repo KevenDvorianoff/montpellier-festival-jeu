@@ -1,14 +1,17 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
+
+export const UNIQUE_USERNAME = 'UNIQUE_USERNAME'
 
 @Entity()
+@Unique(UNIQUE_USERNAME, ['login'])
 export class Account {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ unique: true })
+    @Column()
     login: string;
 
-    @Column({ select: false })
+    @Column()
     password: string;
 
     @Column()

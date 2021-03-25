@@ -32,3 +32,7 @@ export const allEntities = [
 export function databaseAccessModule() {
     return TypeOrmModule.forFeature(allEntities);
 }
+
+export function isConstraint(e: any, constraintName: string) {
+    return e && e.constraint === constraintName;
+}
