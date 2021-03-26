@@ -1,9 +1,9 @@
 import { IsBoolean, IsNotEmpty, IsString } from "class-validator";
 
-export class CreateAccountDto {
+export class CreateUserDto {
     @IsString()
     @IsNotEmpty()
-    login: string;
+    username: string;
 
     @IsString()
     @IsNotEmpty()

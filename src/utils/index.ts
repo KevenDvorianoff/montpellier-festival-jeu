@@ -1,5 +1,5 @@
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Account } from "src/account/entities/account.entity";
+import { User } from "src/user/entities/user.entity";
 import { Company } from "src/company/entities/company.entity";
 import { Contact } from "src/contact/entities/contact.entity";
 import { GameType } from "src/game-type/entities/game-type.entity";
@@ -14,7 +14,7 @@ import { ReservedTable} from "src/reserved-table/entities/reserved-table.entity"
 
 
 export const allEntities = [
-    Account,
+    User,
     Game,
     Reservation,
     Invoice,
