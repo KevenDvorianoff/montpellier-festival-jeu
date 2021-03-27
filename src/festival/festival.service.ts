@@ -53,7 +53,7 @@ export class FestivalService {
     .addSelect('area.label', 'areaName')
     .addSelect('gameType.label', 'gameType')
     .getRawMany();
-  }
+  } 
 
   update(id: number, updateFestivalDto: UpdateFestivalDto) {
     return this.festivalRepository.update(id,updateFestivalDto);

@@ -36,6 +36,15 @@ export class GameService {
     return this.gameRepository.find();
   }
 
+  findAllForCompany(id: number){
+
+
+    return this.gameRepository.createQueryBuilder("game")
+    .leftJoin("game.publisher", "publisher")
+    .where("publisher.id = :id", {id: id})
+    .getMany()
+  }
+
   async findOne(id: number) {
     const game = await this.gameRepository.findOne(id);
     if (game) {

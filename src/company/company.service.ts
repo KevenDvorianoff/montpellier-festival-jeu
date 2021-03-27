@@ -21,7 +21,7 @@ export class CompanyService {
   async findOne(id: number) {
     const company = await this.companyRepository.findOne(id);
     if (company) {
-      return company;
+      return company
     }
     else {
       throw new NotFoundException(`No company found with id ${id}`)
