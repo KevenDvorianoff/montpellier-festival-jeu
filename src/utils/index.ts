@@ -2,7 +2,6 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "src/user/entities/user.entity";
 import { Company } from "src/company/entities/company.entity";
 import { Contact } from "src/contact/entities/contact.entity";
-import { GameType } from "src/game-type/entities/game-type.entity";
 import { Game } from "src/game/entities/game.entity";
 import { Reservation } from "src/reservation/entities/reservation.entity";
 import { Invoice } from "src/invoice/entities/invoice.entity";
@@ -24,9 +23,7 @@ export const allEntities = [
     Area,
     ReservedTable,
     Company,
-    Contact,
-    GameType
-
+    Contact
 ];
 
 export function databaseAccessModule() {

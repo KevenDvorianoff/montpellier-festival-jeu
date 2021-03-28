@@ -35,7 +35,6 @@ export class FestivalService {
     .leftJoin('reservations.reservedGames', 'reservedGames')
     .leftJoin('reservedGames.game', 'game')
     .leftJoin('reservedGames.area', 'area')
-    .leftJoin('game.gameType', 'gameType')
     .leftJoin('game.publisher', 'publisher')
     .where('festival.isActive = true')
     .select('game.id', 'id')
@@ -48,10 +47,10 @@ export class FestivalService {
     .addSelect('game.maxAge', 'maxage')
     .addSelect('game.isPrototype', 'isPrototype')
     .addSelect('game.publisherId', 'publisherId')
+    .addSelect('game.gameType', 'gameType')
     .addSelect('publisher.name', 'publisherName')
     .addSelect('reservedGames.areaId', 'areaId')
     .addSelect('area.label', 'areaName')
-    .addSelect('gameType.label', 'gameType')
     .getRawMany();
   } 
 

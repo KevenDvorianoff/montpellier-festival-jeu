@@ -13,7 +13,6 @@ import { AreaModule } from './area/area.module';
 import { ReservedTableModule } from './reserved-table/reserved-table.module';
 import { CompanyModule } from './company/company.module';
 import { ContactModule } from './contact/contact.module';
-import { GameTypeModule } from './game-type/game-type.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
@@ -40,7 +39,6 @@ import { AuthModule } from './auth/auth.module';
     ReservedTableModule,
     CompanyModule,
     ContactModule,
-    GameTypeModule,
     AuthModule,
 
   ],

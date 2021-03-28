@@ -35,7 +35,8 @@ export class CreateGameDto {
     @IsNumber()
     publisherId: number;
 
-    @IsNumber()
-    gameTypeId: number;
+    @IsString()
+    @IsNotEmpty()
+    gameType: string;
 
 }

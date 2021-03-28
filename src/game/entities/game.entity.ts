@@ -1,5 +1,4 @@
 import { Company } from "src/company/entities/company.entity";
-import { GameType } from "src/game-type/entities/game-type.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -34,10 +33,10 @@ export class Game {
     @Column()
     lastModification: Date;
 
+    @Column()
+    gameType: string
+
     // Relation
     @ManyToOne(() => Company, (publisher) => publisher.games)
     publisher: Company;
-
-    @ManyToOne(() => GameType, (gameType) => gameType.games)
-    gameType: GameType;
 }

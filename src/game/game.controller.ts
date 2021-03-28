@@ -17,6 +17,11 @@ export class GameController {
     return this.gameService.findAll();
   }
 
+  @Get('gameType')
+  findAllGameType() {
+    return this.gameService.findAllGameType();
+  }
+
   @Get('company/:id')
   findAllForCompany(@Param('id') id: string) {
     return this.gameService.findAllForCompany(+id);
