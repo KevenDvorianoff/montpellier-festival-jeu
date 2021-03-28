@@ -49,6 +49,7 @@ export class GameService {
     .addSelect('game.publisherId', 'publisherId')
     .addSelect('publisher.name', 'publisherName')
     .addSelect('gameType.label', 'gameType')
+    .addSelect('gameType.id', 'gameTypeId')
     .getRawMany()
   }
 
