@@ -1,4 +1,4 @@
-import { IsBoolean, IsInt, IsNotEmpty, IsNumber, IsString, IsDate } from "class-validator";
+import { IsBoolean, IsInt, IsNotEmpty, IsNumber, IsString, IsDate, IsUrl } from "class-validator";
 import { Type } from "class-transformer";
 
 export class CreateGameDto {
@@ -6,8 +6,7 @@ export class CreateGameDto {
     @IsNotEmpty()
     name: string;
 
-    @IsString()
-    @IsNotEmpty()
+    @IsUrl()
     notice: string;
 
     @IsString()

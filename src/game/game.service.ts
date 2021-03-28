@@ -33,7 +33,23 @@ export class GameService {
   }
 
   findAll() {
-    return this.gameRepository.find();
+    return this.gameRepository.createQueryBuilder("game")
+    .leftJoin("game.publisher", "publisher")
+    .leftJoin("game.gameType", "gameType")
+    .select('game.id', 'id')
+    .addSelect('game.name', 'name')
+    .addSelect('game.notice', 'notice')
+    .addSelect('game.duration', 'duration')
+    .addSelect('game.minPlayers', 'minPlayers')
+    .addSelect('game.maxPlayers', 'maxPlayers')
+    .addSelect('game.minAge', 'minAge')
+    .addSelect('game.maxAge', 'maxage')
+    .addSelect('game.isPrototype', 'isPrototype')
+    .addSelect('game.lastModification', 'lastModification')
+    .addSelect('game.publisherId', 'publisherId')
+    .addSelect('publisher.name', 'publisherName')
+    .addSelect('gameType.label', 'gameType')
+    .getRawMany()
   }
 
   findAllForCompany(id: number){
