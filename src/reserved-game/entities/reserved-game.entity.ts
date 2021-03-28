@@ -30,7 +30,7 @@ export class ReservedGame {
     @ManyToOne(() => Reservation, (reservation) => reservation.reservedGames, { primary: true })
     reservation: Reservation;
 
-    @ManyToOne(() => Game, { primary: true })
+    @ManyToOne(() => Game, { primary: true, onDelete: 'CASCADE'})
     game: Game;
 
     @ManyToOne(() => Area, { nullable: true })
