@@ -17,6 +17,11 @@ export class ContactController {
     return this.contactService.findAll();
   }
 
+  @Get('company/:id')
+  findAllForCompany(@Param('id') id: string) {
+    return this.contactService.findAllForCompany(+id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.contactService.findOne(+id);

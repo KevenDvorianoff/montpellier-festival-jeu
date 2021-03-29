@@ -29,6 +29,15 @@ export class ContactService {
     return this.contactRepository.find();
   }
 
+  findAllForCompany(id: number){
+
+
+    return this.contactRepository.createQueryBuilder("contact")
+    .leftJoin("contact.company", "company")
+    .where("company.id = :id", {id: id})
+    .getMany()
+  }
+
   async findOne(id: number) {
     const contact = await this.contactRepository.findOne(id);
     if (contact) {
