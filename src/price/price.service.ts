@@ -43,11 +43,19 @@ export class PriceService {
     }
   }
 
-  update(id: number, updatePriceDto: UpdatePriceDto) {
-    return this.priceRepository.update(id,updatePriceDto);
+  async update(id: number, updatePriceDto: UpdatePriceDto) {
+    const result = await this.priceRepository.update(id,updatePriceDto);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 
-  remove(id: number) {
-    return this.priceRepository.delete(id);
+  async remove(id: number) {
+    const result = await this.priceRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 } 

@@ -54,11 +54,19 @@ export class FestivalService {
     .getRawMany();
   } 
 
-  update(id: number, updateFestivalDto: UpdateFestivalDto) {
-    return this.festivalRepository.update(id,updateFestivalDto);
+  async update(id: number, updateFestivalDto: UpdateFestivalDto) {
+    const result = await this.festivalRepository.update(id,updateFestivalDto);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 
-  remove(id: number) {
-    return this.festivalRepository.delete(id);
+  async remove(id: number) {
+    const result = await this.festivalRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 }

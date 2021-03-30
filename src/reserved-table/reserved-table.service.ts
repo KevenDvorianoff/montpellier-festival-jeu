@@ -50,11 +50,19 @@ export class ReservedTableService {
     }
   }
 
-  update(idPrice: number, idReservation: number, updateReservedTableDto: UpdateReservedTableDto) {
-    return this.reservedtableRepository.update({price: { id: idPrice }, reservation: { id: idReservation }}, updateReservedTableDto);
+  async update(idPrice: number, idReservation: number, updateReservedTableDto: UpdateReservedTableDto) {
+    const result = await this.reservedtableRepository.update({price: { id: idPrice }, reservation: { id: idReservation }}, updateReservedTableDto);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 
-  remove(idPrice: number, idReservation: number) {
-    return this.reservedtableRepository.delete({price: { id: idPrice }, reservation: { id: idReservation }});
+  async remove(idPrice: number, idReservation: number) {
+    const result = await this.reservedtableRepository.delete({price: { id: idPrice }, reservation: { id: idReservation }});
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 }

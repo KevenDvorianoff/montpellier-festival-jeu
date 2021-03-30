@@ -26,11 +26,19 @@ export class InvoiceService {
     }
   }
 
-  update(id: number, updateInvoiceDto: UpdateInvoiceDto) {
-    return this.invoiceRepository.update(id,updateInvoiceDto);
+  async update(id: number, updateInvoiceDto: UpdateInvoiceDto) {
+    const result = await this.invoiceRepository.update(id,updateInvoiceDto);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 
-  remove(id: number) {
-    return this.invoiceRepository.delete(id);
+  async remove(id: number) {
+    const result = await this.invoiceRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 }

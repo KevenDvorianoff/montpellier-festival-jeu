@@ -39,11 +39,19 @@ export class AreaService {
     }
   }
 
-  update(id: number, updateAreaDto: UpdateAreaDto) {
-    return this.areaRepository.update(id, updateAreaDto);
+  async update(id: number, updateAreaDto: UpdateAreaDto) {
+    const result = await this.areaRepository.update(id, updateAreaDto);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 
-  remove(id: number) {
-    return this.areaRepository.delete(id);
+  async remove(id: number) {
+    const result = await this.areaRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 }

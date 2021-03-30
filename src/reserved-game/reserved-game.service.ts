@@ -74,18 +74,30 @@ export class ReservedGameService {
       const area = await this.areaRepository.findOne(areaId);
 
       if(area){
-        return this.reservedGameRepository.update({reservation: { id: idReservation }, game: { id: idGame }}, {area, ...dto});
+        const result = await this.reservedGameRepository.update({reservation: { id: idReservation }, game: { id: idGame }}, {area, ...dto});
+        if (result.affected === 0) {
+          throw new NotFoundException();
+        }
+        return result;
       }
       else{
         throw new BadRequestException();
       }
     }
     else{
-      return this.reservedGameRepository.update([idReservation, idGame], updateReservedGameDto);
+      const result = await this.reservedGameRepository.update([idReservation, idGame], updateReservedGameDto);
+      if (result.affected === 0) {
+        throw new NotFoundException();
+      }
+      return result;
     }
   }
 
-  remove(idReservation: number, idGame: number) {
-    return this.reservedGameRepository.delete({reservation: { id: idReservation }, game: { id: idGame }});
+  async remove(idReservation: number, idGame: number) {
+    const result = await this.reservedGameRepository.delete({reservation: { id: idReservation }, game: { id: idGame }});
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 } 

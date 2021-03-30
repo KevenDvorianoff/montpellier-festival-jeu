@@ -54,11 +54,19 @@ export class CompanyService {
     }
   }
  
-  update(id: number, updateCompanyDto: UpdateCompanyDto) {
-    return this.companyRepository.update(id, updateCompanyDto);
+  async update(id: number, updateCompanyDto: UpdateCompanyDto) {
+    const result = await this.companyRepository.update(id, updateCompanyDto);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 
-  remove(id: number) {
-    return this.companyRepository.delete(id);
+  async remove(id: number) {
+    const result = await this.companyRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 }

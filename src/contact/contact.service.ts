@@ -48,11 +48,19 @@ export class ContactService {
     }
   }
 
-  update(id: number, updateContactDto: UpdateContactDto) {
-    return this.contactRepository.update(id, updateContactDto);
+  async update(id: number, updateContactDto: UpdateContactDto) {
+    const result = await this.contactRepository.update(id, updateContactDto);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 
-  remove(id: number) {
-    return this.contactRepository.delete(id);
+  async remove(id: number) {
+    const result = await this.contactRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 }

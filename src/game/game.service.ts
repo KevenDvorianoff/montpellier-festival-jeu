@@ -11,49 +11,49 @@ export class GameService {
   constructor(
     @InjectRepository(Game) private gameRepository: Repository<Game>,
     @InjectRepository(Company) private companyRepository: Repository<Company>
-    ) {}
+  ) { }
 
   async create(createGameDto: CreateGameDto) {
     const { publisherId, ...dto } = createGameDto;
     const publisher = await this.companyRepository.findOne(publisherId);
-    if (publisher){
-        return this.gameRepository.save({publisher, ...dto});
+    if (publisher) {
+      return this.gameRepository.save({ publisher, ...dto });
     }
     else {
-        throw new BadRequestException();
-      }
+      throw new BadRequestException();
+    }
   }
 
   findAll() {
     return this.gameRepository.createQueryBuilder("game")
-    .leftJoin("game.publisher", "publisher")
-    .select('game.id', 'id')
-    .addSelect('game.name', 'name')
-    .addSelect('game.notice', 'notice')
-    .addSelect('game.duration', 'duration')
-    .addSelect('game.minPlayers', 'minPlayers')
-    .addSelect('game.maxPlayers', 'maxPlayers')
-    .addSelect('game.minAge', 'minAge')
-    .addSelect('game.maxAge', 'maxAge')
-    .addSelect('game.isPrototype', 'isPrototype')
-    .addSelect('game.lastModification', 'lastModification')
-    .addSelect('game.publisherId', 'publisherId')
-    .addSelect('game.gameType', 'gameType')
-    .addSelect('publisher.name', 'publisherName')
-    .getRawMany()
+      .leftJoin("game.publisher", "publisher")
+      .select('game.id', 'id')
+      .addSelect('game.name', 'name')
+      .addSelect('game.notice', 'notice')
+      .addSelect('game.duration', 'duration')
+      .addSelect('game.minPlayers', 'minPlayers')
+      .addSelect('game.maxPlayers', 'maxPlayers')
+      .addSelect('game.minAge', 'minAge')
+      .addSelect('game.maxAge', 'maxAge')
+      .addSelect('game.isPrototype', 'isPrototype')
+      .addSelect('game.lastModification', 'lastModification')
+      .addSelect('game.publisherId', 'publisherId')
+      .addSelect('game.gameType', 'gameType')
+      .addSelect('publisher.name', 'publisherName')
+      .getRawMany()
   }
 
   findAllGameType() {
     return this.gameRepository.createQueryBuilder("game")
-    .select("DISTINCT game.gameType", "gameType")
-    .getRawMany()
+      .select("DISTINCT game.gameType", "gameType")
+      .getRawMany()
   }
 
-  findAllForCompany(id: number){
+  findAllForCompany(id: number) {
     return this.gameRepository.createQueryBuilder("game")
-    .leftJoin("game.publisher", "publisher")
-    .where("publisher.id = :id", {id: id})
-    .getMany()
+      .leftJoin("game.publisher", "publisher")
+      .where("publisher.id = :id", { id: id })
+      .getMany()
   }
 
   async findOne(id: number) {
@@ -69,12 +69,16 @@ export class GameService {
   async update(id: number, updateGameDto: UpdateGameDto) {
     const { publisherId, ...dto } = updateGameDto;
     const publisher = await this.companyRepository.findOne(publisherId);
-    if (publisher){
-        return this.gameRepository.update(id, {publisher, ...dto});
+    if (publisher) {
+      const result = await this.gameRepository.update(id, { publisher, ...dto });
+      if (result.affected === 0) {
+        throw new NotFoundException();
+      }
+      return result;
     }
     else {
-        throw new BadRequestException();
-      }
+      throw new BadRequestException();
+    }
   }
 
   async remove(id: number) {

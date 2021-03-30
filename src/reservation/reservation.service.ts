@@ -64,18 +64,30 @@ export class ReservationService {
       const invoice = await this.invoiceRepository.findOne(invoiceId);
 
       if (invoice) {
-        return this.reservationRepository.update(id, { invoice, ...dto });
+        const result = await this.reservationRepository.update(id, { invoice, ...dto });
+        if (result.affected === 0) {
+          throw new NotFoundException();
+        }
+        return result;
       }
       else {
         throw new BadRequestException();
       }
     }
     else {
-        return this.reservationRepository.update(id, updateReservationDto);
+        const result = await this.reservationRepository.update(id, updateReservationDto);
+        if (result.affected === 0) {
+          throw new NotFoundException();
+        }
+        return result;
     }
   }
 
-  remove(id: number) {
-    return this.reservationRepository.delete(id);
+  async remove(id: number) {
+    const result = await this.reservationRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 }

@@ -77,7 +77,7 @@ export class UserService {
       if (isConstraint(e, UNIQUE_USERNAME)) {
         throw new BadRequestException('This username is already used');
       }
-      throw new InternalServerErrorException('Unable to create a new user');
+      throw new InternalServerErrorException('Unable to update this new user');
     }
 
     if (result.affected === 0) {
@@ -86,7 +86,11 @@ export class UserService {
     return await this.findOne(id);
   }
 
-  remove(id: number) {
-    return this.userRepository.delete(id);
+  async remove(id: number) {
+    const result = await this.userRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 }
