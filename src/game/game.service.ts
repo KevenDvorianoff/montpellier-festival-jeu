@@ -77,7 +77,11 @@ export class GameService {
       }
   }
 
-  remove(id: number) {
-    return this.gameRepository.delete(id);
+  async remove(id: number) {
+    const result = await this.gameRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 }
