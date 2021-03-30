@@ -22,7 +22,7 @@ export class CompanyController {
   findOne(@Param('id') id: string) {
     return this.companyService.findOne(+id);
   }
-
+ 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
     return this.companyService.update(+id, updateCompanyDto);

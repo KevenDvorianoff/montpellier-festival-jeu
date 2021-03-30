@@ -53,7 +53,7 @@ export class CompanyService {
       throw new NotFoundException(`No company found with id ${id}`)
     }
   }
-
+ 
   update(id: number, updateCompanyDto: UpdateCompanyDto) {
     return this.companyRepository.update(id, updateCompanyDto);
   }
