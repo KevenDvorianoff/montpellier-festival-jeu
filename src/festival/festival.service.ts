@@ -33,6 +33,7 @@ export class FestivalService {
     return this.festivalRepository.createQueryBuilder('festival')
     .leftJoin('festival.reservations', 'reservations')
     .leftJoin('reservations.reservedGames', 'reservedGames')
+    .leftJoin('reservations.company', 'exhibitor')
     .leftJoin('reservedGames.game', 'game')
     .leftJoin('reservedGames.area', 'area')
     .leftJoin('game.publisher', 'publisher')
@@ -46,13 +47,41 @@ export class FestivalService {
     .addSelect('game.minAge', 'minAge')
     .addSelect('game.maxAge', 'maxage')
     .addSelect('game.isPrototype', 'isPrototype')
-    .addSelect('game.publisherId', 'publisherId')
     .addSelect('game.gameType', 'gameType')
     .addSelect('publisher.name', 'publisherName')
-    .addSelect('reservedGames.areaId', 'areaId')
+    .addSelect('exhibitor.name', 'exhibitorName')
     .addSelect('area.label', 'areaName')
+    .addSelect('reservedGames.exposed', 'exposed')
+    .addSelect('reservedGames.donation', 'donation')
+    .addSelect('reservedGames.tombola', 'tombola')
+    .addSelect('reservedGames.receiveDate', 'receiveDate')
+    .addSelect('reservedGames.needReturn', 'needReturn')
+    .addSelect('reservedGames.tableCount', 'tableCount')
     .getRawMany();
-  } 
+  }
+
+  findPublishersForCurrentFestival() {
+    return this.festivalRepository.createQueryBuilder('festival')
+    .leftJoin('festival.reservations', 'reservations')
+    .leftJoin('reservations.reservedGames', 'reservedGames')
+    .leftJoin('reservedGames.game', 'game')
+    .leftJoin('game.publisher', 'publisher')
+    .where('festival.isActive = true')
+    .select('publisher.id', 'id')
+    .addSelect('publisher.name', 'name')
+    .addSelect('publisher.address', 'address')
+    .distinct(true)
+    .getRawMany();
+  }
+
+  findAreasForCurrentFestival() {
+    return this.festivalRepository.createQueryBuilder('festival')
+    .leftJoin('festival.areas', 'areas')
+    .where('festival.isActive = true')
+    .select('areas.id', 'id')
+    .addSelect('areas.label', 'label')
+    .getRawMany();
+  }
 
   async update(id: number, updateFestivalDto: UpdateFestivalDto) {
     const result = await this.festivalRepository.update(id,updateFestivalDto);

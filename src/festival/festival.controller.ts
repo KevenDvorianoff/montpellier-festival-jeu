@@ -21,6 +21,16 @@ export class FestivalController {
   findGamesForCurrentFestival() {
     return this.festivalService.findGamesForCurrentFestival();
   }
+
+  @Get('current/publishers')
+  findPublishersForCurrentFestival() {
+    return this.festivalService.findPublishersForCurrentFestival();
+  }
+
+  @Get('current/areas')
+  findAreasForCurrentFestival() {
+    return this.festivalService.findAreasForCurrentFestival();
+  }
   
   @Get(':id')
   findOne(@Param('id') id: string) {

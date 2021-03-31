@@ -1,7 +1,11 @@
 import { Contact } from "src/contact/entities/contact.entity";
 import { Game } from "src/game/entities/game.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 
+export const UNIQUE_COMPANY_NAME = 'UNIQUE_COMPANY_NAME'
+
+@Entity()
+@Unique(UNIQUE_COMPANY_NAME, ['name'])
 @Entity()
 export class Company {
     @PrimaryGeneratedColumn()
