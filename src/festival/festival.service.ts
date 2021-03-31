@@ -96,7 +96,15 @@ export class FestivalService {
   async update(id: number, updateFestivalDto: UpdateFestivalDto) {
     let result: UpdateResult;
     try {
-      result = await this.festivalRepository.update(id, updateFestivalDto);
+      if (updateFestivalDto.isActive) {
+        await getManager().transaction(async manager => {
+          await manager.update(Festival, { isActive: true }, { isActive: false });
+          result = await manager.update(Festival, { id: id }, updateFestivalDto)
+        })
+      }
+      else {
+        result = await this.festivalRepository.update(id, updateFestivalDto);
+      }
     }
     catch (e) {
       if (isConstraint(e, UNIQUE_FESTIVAL_NAME)) {
