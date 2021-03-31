@@ -4,7 +4,6 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeo
 
 export const UNIQUE_COMPANY_NAME = 'UNIQUE_COMPANY_NAME'
 
-@Entity()
 @Unique(UNIQUE_COMPANY_NAME, ['name'])
 @Entity()
 export class Company {
