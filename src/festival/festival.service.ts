@@ -45,7 +45,7 @@ export class FestivalService {
     .addSelect('game.minPlayers', 'minPlayers')
     .addSelect('game.maxPlayers', 'maxPlayers')
     .addSelect('game.minAge', 'minAge')
-    .addSelect('game.maxAge', 'maxage')
+    .addSelect('game.maxAge', 'maxAge')
     .addSelect('game.isPrototype', 'isPrototype')
     .addSelect('game.lastModification', 'lastModification')
     .addSelect('game.gameType', 'gameType')
