@@ -47,6 +47,7 @@ export class FestivalService {
     .addSelect('game.minAge', 'minAge')
     .addSelect('game.maxAge', 'maxage')
     .addSelect('game.isPrototype', 'isPrototype')
+    .addSelect('game.lastModification', 'lastModification')
     .addSelect('game.gameType', 'gameType')
     .addSelect('publisher.name', 'publisherName')
     .addSelect('exhibitor.name', 'exhibitorName')
