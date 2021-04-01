@@ -53,6 +53,27 @@ export class ReservedGameService {
     );
   }
 
+  findAllEditeurs(){
+    return this.reservedGameRepository.createQueryBuilder('reservedGames')
+    .leftJoin('reservedGames.game', 'game')
+    .leftJoin('game.publisher', 'company')
+    .select('company.id','id')
+    .addSelect('company.name', 'name')
+    .addSelect('company.address', 'address')
+    .addSelect('company.isPublisher','isPublisher')
+    .addSelect('company.isExhibitor','isExhibitor')
+    .addSelect('company.isActive','isActive')
+    .getRawMany()
+  }
+
+  findAllForCompany(id: number){
+    return this.reservedGameRepository.createQueryBuilder("reservedGames")
+      .leftJoin("reservedGames.game", "game")
+      .leftJoin("game.publisher", "publisher")
+      .where("publisher.id = :id", { id: id })
+      .getMany()
+  }
+
   async findOne(idReservation: number, idGame: number) {
     const reservedGame = await this.reservedGameRepository.findOne({reservation: { id: idReservation }, game: { id: idGame }}, {
       relations: [ 'area' ]

@@ -22,6 +22,16 @@ export class ReservedGameController {
     return this.reservedGameService.findGamesForAreas(+id);
   }
 
+  @Get('/company')
+  findAllEditeurs(){
+    return this.reservedGameService.findAllEditeurs();
+  }
+
+  @Get('company/:id')
+  findAllForCompany(@Param('id') id: string) {
+    return this.reservedGameService.findAllForCompany(+id);
+  }
+
   @Get(':idReservation/:idGame')
   findOne(@Param('idReservation') idReservation: string, @Param('idGame') idGame: string) {
     return this.reservedGameService.findOne(+idReservation, +idGame);
