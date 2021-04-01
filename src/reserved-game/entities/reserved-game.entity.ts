@@ -27,7 +27,7 @@ export class ReservedGame {
     tableCount: number;
 
     // Relation
-    @ManyToOne(() => Reservation, (reservation) => reservation.reservedGames, { primary: true })
+    @ManyToOne(() => Reservation, (reservation) => reservation.reservedGames, { primary: true, onDelete: 'CASCADE' })
     reservation: Reservation;
 
     @ManyToOne(() => Game, { primary: true, onDelete: 'CASCADE'})

@@ -14,6 +14,6 @@ export class ReservedTable {
     @ManyToOne(() => Price, { primary: true })
     price: Price;
 
-    @ManyToOne(() => Reservation, (reservation) => reservation.reservedTables, { primary: true })
+    @ManyToOne(() => Reservation, (reservation) => reservation.reservedTables, { primary: true, onDelete: "CASCADE" })
     reservation: Reservation;
 }
