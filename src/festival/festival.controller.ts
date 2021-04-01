@@ -22,6 +22,16 @@ export class FestivalController {
     return this.festivalService.findGamesForCurrentFestival();
   }
 
+  @Get('current/reserved-games/area/:id')
+  findGamesForCurrentArea(@Param('id') id : string) {
+    return this.festivalService.findGamesForCurrentArea(+id);
+  }
+
+  @Get('current/reserved-games/company/:id')
+  findGamesForCurrentCompany(@Param('id') id : string) {
+    return this.festivalService.findGamesForCurrentCompany(+id);
+  }
+
   @Get('current/publishers')
   findPublishersForCurrentFestival() {
     return this.festivalService.findPublishersForCurrentFestival();
