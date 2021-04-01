@@ -26,7 +26,22 @@ export class ContactService {
   }
 
   findAll() {
-    return this.contactRepository.find();
+    return this.contactRepository.createQueryBuilder('contact')
+    .leftJoin("contact.company","company")
+    .select("contact.id", "id")
+    .addSelect("contact.firstname","firstname")
+    .addSelect("contact.lastname","lastname")
+    .addSelect("contact.isPrincipal", "isPrincipal")
+    .addSelect("contact.email","email")
+    .addSelect("contact.personalPhone", "personalPhone")
+    .addSelect("contact.workPhone", "workPhone")
+    .addSelect("contact.street", "street")
+    .addSelect("contact.city", "city")
+    .addSelect("contact.postalCode", "postalCode")
+    .addSelect("contact.function", "function")
+    .addSelect("company.id", "companyId")
+    .addSelect("company.name", "companyName")
+    .getRawMany();
   }
 
   findAllForCompany(id: number){
