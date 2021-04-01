@@ -44,7 +44,16 @@ export class ReservationService {
   }
 
   findAll() {
-    return this.reservationRepository.find();
+    return this.reservationRepository.createQueryBuilder('reservation')
+    .leftJoin('reservation.festival','festival')
+    .leftJoin('reservation.company', 'company')
+    .where('festival.isActive = true')
+    .select("reservation.id","id")
+    .addSelect('reservation.needVolunteers', "needVolunteers")
+    .addSelect('reservation.isPresent','isPresent')
+    .addSelect('reservation.isPlaced', 'isPlaced')
+    .addSelect('company.name','companyName')
+    .getRawMany();
   }
 
   async findOne(id: number) {
