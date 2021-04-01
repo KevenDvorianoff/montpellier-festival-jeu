@@ -13,7 +13,4 @@ export class Area {
     // Relation
     @ManyToOne(() => Festival, (festival) => festival.areas)
     festival: Festival;
-
-    @OneToMany(() => ReservedGame, (reservedGame) => reservedGame.area)
-    reservedGames: ReservedGame[];
 }

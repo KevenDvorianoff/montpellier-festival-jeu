@@ -17,6 +17,11 @@ export class ReservedGameController {
     return this.reservedGameService.findAll();
   }
 
+  @Get('area/:id')
+  findGamesForAreas(@Param('id') id: string) {
+    return this.reservedGameService.findGamesForAreas(+id);
+  }
+
   @Get(':idReservation/:idGame')
   findOne(@Param('idReservation') idReservation: string, @Param('idGame') idGame: string) {
     return this.reservedGameService.findOne(+idReservation, +idGame);

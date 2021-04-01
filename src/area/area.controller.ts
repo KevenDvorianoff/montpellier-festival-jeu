@@ -16,10 +16,7 @@ export class AreaController {
   findAll() {
     return this.areaService.findAll();
   }
-  @Get(':id/reserved-games')
-  findGamesForArea(@Param('id') id: string) {
-    return this.areaService.findGamesForArea(+id);
-  }
+  
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.areaService.findOne(+id);

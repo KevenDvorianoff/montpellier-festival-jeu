@@ -100,4 +100,13 @@ export class ReservedGameService {
     }
     return result;
   }
+  findGamesForAreas(id:number) {
+    return this.reservedGameRepository.createQueryBuilder('reserved_game')
+    .leftJoin('reserved_game.area', 'area')
+    .leftJoin('reserved_game.game', 'game')
+    .where('area.id = :id', {id:id})
+    .select('game.name', 'name')
+    .distinct(true)
+    .getRawMany();
+  }
 } 

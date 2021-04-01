@@ -33,6 +33,6 @@ export class ReservedGame {
     @ManyToOne(() => Game, { primary: true, onDelete: 'CASCADE'})
     game: Game;
 
-    @ManyToOne(() => Area, (area) => area.reservedGames, { nullable: true })
+    @ManyToOne(() => Area, { nullable: true })
     area: Area;
 }
