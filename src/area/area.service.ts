@@ -54,4 +54,18 @@ export class AreaService {
     }
     return result;
   }
+
+  findGamesForArea(id:number) {
+    return this.areaRepository.createQueryBuilder('area')
+    .leftJoin('reservedGames.game', 'game')
+    .where('area.id = :id', {id:id})
+    .select('reservedGames.id', 'id')
+    .addSelect('reservedGames.exposed', 'exposed')
+    .addSelect('reservedGames.donation', 'donation')
+    .addSelect('reservedGames.tombola', 'tombola')
+    .addSelect('reservedGames.receiveDate', 'receiveDate')
+    .addSelect('reservedGames.needReturn', 'needReturn')
+    .addSelect('reservedGames.tableCount', 'tableCount')
+    .getRawMany();
+  }
 }
