@@ -57,7 +57,7 @@ export class AreaService {
 
   findGamesForArea(id:number) {
     return this.areaRepository.createQueryBuilder('area')
-    .leftJoin('reservedGames.game', 'game')
+    .leftJoin('area.reservedGames', 'reservedGames')
     .where('area.id = :id', {id:id})
     .select('reservedGames.id', 'id')
     .addSelect('reservedGames.exposed', 'exposed')
