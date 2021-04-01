@@ -31,6 +31,11 @@ export class FestivalController {
   findAreasForCurrentFestival() {
     return this.festivalService.findAreasForCurrentFestival();
   }
+
+  @Get(':id/prices')
+  findPriceForFestival(@Param('id') id: string) {
+    return this.festivalService.findPriceForFestival(+id);
+  }
   
   @Get(':id')
   findOne(@Param('id') id: string) {

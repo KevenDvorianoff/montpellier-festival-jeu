@@ -1,5 +1,6 @@
 import { Festival } from "src/festival/entities/festival.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { ReservedTable } from "src/reserved-table/entities/reserved-table.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Price {
@@ -24,4 +25,7 @@ export class Price {
     // Relation
     @ManyToOne(() => Festival, (festival) => festival.prices)
     festival: Festival;
+
+    @OneToMany(() => ReservedTable, (reservedTable) => reservedTable.price)
+    reservedTables: ReservedTable[];
 }

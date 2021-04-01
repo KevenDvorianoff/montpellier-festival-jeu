@@ -93,6 +93,23 @@ export class FestivalService {
       .getRawMany();
   }
 
+  findPriceForFestival(id: number) {
+    return this.festivalRepository.createQueryBuilder('festival')
+      .leftJoinAndSelect('festival.prices', 'prices')
+      .leftJoinAndSelect('prices.reservedTables', 'reservedTables')
+      .where('festival.id = :id', { id: id })
+      .select('prices.id', 'id')
+      .addSelect('prices.label', 'label')
+      .addSelect('prices.tableCount', 'tableCount')
+      .addSelect('prices.m2Count', 'm2Count')
+      .addSelect('prices.m2Price', 'm2Price')
+      .addSelect('prices.tablePrice', 'tablePrice')
+      .addSelect('SUM(reservedTables.tableCount)', 'reservedTableCount')
+      .addSelect('SUM(reservedTables.m2Count)', 'reservedM2Count')
+      .groupBy('prices.id')
+      .getRawMany()
+  }
+
   async update(id: number, updateFestivalDto: UpdateFestivalDto) {
     let result: UpdateResult;
     try {
