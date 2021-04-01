@@ -57,6 +57,9 @@ export class ReservedGameService {
     return this.reservedGameRepository.createQueryBuilder('reservedGames')
     .leftJoin('reservedGames.game', 'game')
     .leftJoin('game.publisher', 'company')
+    .leftJoin('reservedGames.reservation', 'reservation')
+    .leftJoin('reservation.festival', 'festival')
+    .where('festival.isActive = true')
     .select('company.id','id')
     .addSelect('company.name', 'name')
     .addSelect('company.address', 'address')
@@ -69,8 +72,11 @@ export class ReservedGameService {
   findAllForCompany(id: number){
     return this.reservedGameRepository.createQueryBuilder("reservedGames")
       .leftJoin("reservedGames.game", "game")
+      .leftJoin('reservedGames.reservation', 'reservation')
+      .leftJoin('reservation.festival', 'festival')
       .leftJoin("game.publisher", "publisher")
       .where("publisher.id = :id", { id: id })
+      .andWhere("festival.isActive = true")
       .getMany()
   }
 
