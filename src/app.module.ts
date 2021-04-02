@@ -17,7 +17,7 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(), 
+    ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -26,6 +26,10 @@ import { AuthModule } from './auth/auth.module';
         type: 'postgres',
         autoLoadEntities: true,
         synchronize: config.get('NODE_ENV') !== 'production',
+        ssl: config.get('NODE_ENV') === 'production' ? {
+          rejectUnauthorized: false,
+        }
+          : false
       }),
     }),
     UserModule,
@@ -45,4 +49,4 @@ import { AuthModule } from './auth/auth.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
