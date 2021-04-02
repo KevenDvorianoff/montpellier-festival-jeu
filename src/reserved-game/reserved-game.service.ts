@@ -66,6 +66,7 @@ export class ReservedGameService {
     .addSelect('company.isPublisher','isPublisher')
     .addSelect('company.isExhibitor','isExhibitor')
     .addSelect('company.isActive','isActive')
+    .distinct(true)
     .getRawMany()
   }
 
