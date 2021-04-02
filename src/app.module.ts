@@ -25,7 +25,7 @@ import { AuthModule } from './auth/auth.module';
         url: config.get('DATABASE_URL'),
         type: 'postgres',
         autoLoadEntities: true,
-        synchronize: config.get('NODE_ENV') !== 'production',
+        synchronize: true,
         ssl: config.get('NODE_ENV') === 'production' ? {
           rejectUnauthorized: false,
         }
