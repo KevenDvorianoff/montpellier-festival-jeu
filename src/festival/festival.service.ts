@@ -179,8 +179,11 @@ export class FestivalService {
   findCurrentFestivalId(){
     return this.festivalRepository.createQueryBuilder('festival')
     .where('festival.isActive = true')
-    .select('festival.id', 'festivalId')
-    .getRawOne()
+    .select('festival.id', 'id')
+    .addSelect('festival.name', 'name')
+    .addSelect('festival.date','date')
+    .addSelect('festival.isActive', 'isActive')
+    .getRawMany()
   }
 
   async update(id: number, updateFestivalDto: UpdateFestivalDto) {
