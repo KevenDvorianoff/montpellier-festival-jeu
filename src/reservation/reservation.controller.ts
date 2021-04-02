@@ -17,6 +17,11 @@ export class ReservationController {
     return this.reservationService.findAll();
   }
 
+  @Get('invoices')
+  findInvoices() {
+    return this.reservationService.findInvoices();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.reservationService.findOne(+id);

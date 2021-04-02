@@ -56,6 +56,21 @@ export class ReservationService {
     .getRawMany();
   }
 
+  findInvoices() {
+    return this.reservationRepository.createQueryBuilder('reservation')
+    .leftJoin('reservation.festival', 'festival')
+    .leftJoin('reservation.invoice','invoice')
+    .leftJoin('reservation.company', 'company')
+    .where('festival.isActive = true')
+    .select("invoice.id","id")
+    .addSelect('invoice.price', "price")
+    .addSelect('invoice.discount','discount')
+    .addSelect('invoice.sentDate', 'sentDate')
+    .addSelect('invoice.paymentDate', 'paymentDate')
+    .addSelect('company.name','companyName')
+    .getRawMany();
+  }
+
   async findOne(id: number) {
     const reservation = await this.reservationRepository.findOne(id);
     if (reservation) {
