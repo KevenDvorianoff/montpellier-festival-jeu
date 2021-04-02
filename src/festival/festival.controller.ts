@@ -32,6 +32,11 @@ export class FestivalController {
     return this.festivalService.findGamesForCurrentCompany(+id);
   }
 
+  @Get('current')
+  findCurrentFestivalId(){
+    return this.festivalService.findCurrentFestivalId()
+  }
+
   @Get('current/publishers')
   findPublishersForCurrentFestival() {
     return this.festivalService.findPublishersForCurrentFestival();

@@ -176,6 +176,13 @@ export class FestivalService {
       .getRawMany()
   }
 
+  findCurrentFestivalId(){
+    return this.festivalRepository.createQueryBuilder('festival')
+    .where('festival.isActive = true')
+    .select('festival.id', 'festivalId')
+    .getRawOne()
+  }
+
   async update(id: number, updateFestivalDto: UpdateFestivalDto) {
     let result: UpdateResult;
     try {
